@@ -21,6 +21,32 @@ Three files. You bring them. You fill them in before the build sprint.
 
 ---
 
+## `signals.csv` — the `customer_size` column
+
+`customer_size` is a revenue-impact proxy. Use the value that best reflects how much this customer's problem matters commercially.
+
+**B2B products:**
+
+| Value | Maps to |
+|---|---|
+| XL | Enterprise (large company, high ARR) |
+| L | Mid-market |
+| M | SMB |
+| S | Startup |
+| XS | Micro / very small |
+
+**B2C products:**
+
+| Value | Maps to |
+|---|---|
+| XL | Premium subscriber / highest-value tier |
+| L | Paid subscriber |
+| M | Registered user (free tier) |
+| S | Casual / low-engagement user |
+| XS | Anonymous visitor |
+
+The scoring model treats these identically. The label doesn't change — only what it means in your context.
+
 ## The sequence
 
 ```
