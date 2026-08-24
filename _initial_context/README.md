@@ -14,7 +14,7 @@ Three files. You bring them. You fill them in before the build sprint.
 
 | File | What it is | How long it takes |
 |---|---|---|
-| `signals.csv` | Raw customer signals you have collected | 10–30 min to fill |
+| `signals.csv` | Raw customer signals you have collected | 30–60 min to fill |
 | `business_outcome.md` | The business metric you want to move | 5 min |
 | `product_outcome.md` | The user behavior that drives that metric | 5 min |
 | `data_model.md` | Your product's data entities and fields | 10–20 min to fill |

@@ -6,7 +6,7 @@ Open the `_initial_context/` folder. Fill in each file with real material from y
 
 | File | What to put in | Time |
 |---|---|---|
-| `signals.csv` | 5–10 things customers actually said, word for word | 20–30 min |
+| `signals.csv` | 20–50 things customers actually said, word for word | 30–60 min |
 | `business_outcome.md` | The business metric you want to move | 5 min |
 | `product_outcome.md` | The user behavior that drives that metric | 5 min |
 | `data_model.md` | Your product's main entities and fields | 10–15 min |
