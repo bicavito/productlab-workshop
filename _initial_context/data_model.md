@@ -37,7 +37,7 @@ More than 8 makes the UI hard to use.
 
 ## Sample Rows
 
-3–5 real or representative entries.
+Min 20, up to 100 real or representative entries.
 Real values expose gaps in your model. Placeholders don't.
 Anonymize if needed.
 
