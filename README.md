@@ -70,11 +70,13 @@ Open the file. You will see a table. Fill in the rows.
 
 What is the main "thing" your product tracks? A deal, a ticket, a customer, a report?
 
-List 4 to 8 fields that describe it. For each field: name, type (text, number, date, or a fixed list of options), and a short description.
+List **all** fields that describe it — everything your product actually tracks for this entity. Don't filter yet. For each field: name, type (text, number, date, or a fixed list of options), and a short description.
 
-Add Min 20, up to 100 real rows at the bottom. Use real values, not "example" or "test".
+Typical B2B entities have 10–20 meaningful fields. If you have fewer than 8, you've probably left something out. The AI will decide which fields matter for the view it builds — your job is to give it everything.
 
-**Why we need this:** In the afternoon, you build your own app. This is the data it runs on. The more real your data, the more useful the app.
+Add min 20, up to 100 real rows at the bottom. Use real values, not "example" or "test". Include edge cases: items that are stuck, overdue, escalated, or closed. These are the rows that produce a useful app.
+
+**Why we need this:** In the afternoon, you build your own app. This is the data it runs on. The more complete your data model, the more your app will actually look and work like a real product.
 
 ---
 

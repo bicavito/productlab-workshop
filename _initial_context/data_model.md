@@ -18,8 +18,13 @@ What is the central object in your product?
 
 ## Fields
 
-What fields does this entity have? Aim for 4–8 fields.
-More than 8 makes the UI hard to use.
+What fields does this entity have?
+
+List **all** fields your product actually tracks for this entity. Don't filter — the AI will select what's relevant for the view it builds.
+
+For each field, ask: "Does a user ever need to see this to make a decision about this item?" If yes, include it.
+
+A typical B2B entity has 10–20 meaningful fields. Fewer than 8 usually means you've left out something important.
 
 | Field | Type | Possible values | Description |
 |---|---|---|---|
@@ -40,6 +45,8 @@ More than 8 makes the UI hard to use.
 Min 20, up to 100 real or representative entries.
 Real values expose gaps in your model. Placeholders don't.
 Anonymize if needed.
+
+Include rows that show your real edge cases: items that are stuck, overdue, blocked, escalated, or in terminal states (closed, rejected, cancelled). These are the rows that make your app useful — not the clean success cases.
 
 | [field_1] | [field_2] | [field_3] | [field_4] |
 |---|---|---|---|
