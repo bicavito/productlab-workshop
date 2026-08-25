@@ -34,7 +34,7 @@ Open the file. You will see the format. Add 5 to 10 rows. Use real things real p
 
 If you have more than 10, bring all of them. More signals give better results.
 
-**Why we need this:** In the morning session, we run a tool that reads your signals, groups them by theme, and scores which problem is worth solving first. You will see the output live in your browser. That output tells you what to build in the afternoon.
+**Why we need this:** In the morning session, we run a scoring tool on your signals. It labels each signal with a product bet, a specific problem worth solving, then scores and ranks those bets by revenue impact and volume. The output tells you what to build in the afternoon. The business and product outcome files keep that scope honest. The data model is the foundation your afternoon app runs on. Real data produces better results.
 
 ---
 
@@ -72,7 +72,7 @@ What is the main "thing" your product tracks? A deal, a ticket, a customer, a re
 
 List 4 to 8 fields that describe it. For each field: name, type (text, number, date, or a fixed list of options), and a short description.
 
-Add 3 to 5 real rows at the bottom. Use real values, not "example" or "test".
+Add Min 20, up to 100 real rows at the bottom. Use real values, not "example" or "test".
 
 **Why we need this:** In the afternoon, you build your own app. This is the data it runs on. The more real your data, the more useful the app.
 
