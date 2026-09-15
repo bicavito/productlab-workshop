@@ -10,7 +10,7 @@ This folder gives it that understanding.
 
 ## What goes here
 
-Three files. You bring them. You fill them in before the build sprint.
+Four files. You bring them. You fill them in before the build sprint.
 
 | File | What it is | How long it takes |
 |---|---|---|

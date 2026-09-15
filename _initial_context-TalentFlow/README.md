@@ -1,74 +1,39 @@
-# _initial_context/
+# _initial_context-TalentFlow/
 
-This folder is the starting point of your workshop build.
+This folder contains the **demo dataset** for the morning session.
 
-Before you write a single prompt to generate code, you build context here.
-The AI can only make good decisions when it understands the problem.
-This folder gives it that understanding.
+TalentFlow is a fictional ATS (Applicant Tracking System) used as the live demonstration example during Session 1.
 
----
-
-## What goes here
-
-Three files. You bring them. You fill them in before the build sprint.
-
-| File | What it is | How long it takes |
-|---|---|---|
-| `signals.csv` | Raw customer signals you have collected | 30–60 min to fill |
-| `business_outcome.md` | The business metric you want to move | 5 min |
-| `product_outcome.md` | The user behavior that drives that metric | 5 min |
-| `data_model.md` | Your product's data entities and fields | 10–20 min to fill |
+You do not need to fill anything in here. This data is already complete.
 
 ---
 
-## `signals.csv` — the `customer_size` column
+## What's in here
 
-`customer_size` is a revenue-impact proxy. Use the value that best reflects how much this customer's problem matters commercially.
-
-**B2B products:**
-
-| Value | Maps to |
+| File | What it is |
 |---|---|
-| XL | Enterprise (large company, high ARR) |
-| L | Mid-market |
-| M | SMB |
-| S | Startup |
-| XS | Micro / very small |
+| `signals.csv` | 40 verbatim customer signals from TalentFlow accounts |
+| `business_outcome.md` | The business metric the demo targets |
+| `product_outcome.md` | The user behavior the demo targets |
+| `data_model.md` | The Candidate entity with all fields and 30 sample rows |
 
-**B2C products:**
+---
 
-| Value | Maps to |
-|---|---|
-| XL | Premium subscriber / highest-value tier |
-| L | Paid subscriber |
-| M | Registered user (free tier) |
-| S | Casual / low-engagement user |
-| XS | Anonymous visitor |
+## How it's used
 
-The scoring model treats these identically. The label doesn't change — only what it means in your context.
-
-## The sequence
+During Session 1, Vito runs the full pipeline on this data live.
+You follow along using the same files.
 
 ```
-1. Fill in signals.csv with real signals from your work
-2. Fill in business_outcome.md
-3. Fill in product_outcome.md
-4. Fill in data_model.md — your product’s entities and fields
-5. Open your AI agent (Claude Code, Cursor, etc.)
-6. Run the segmentation prompt (bet_ranker/segment.md)
-   → AI classifies each signal: type, severity, category, bet
-   → Saves _context/signals_segmented.json
-7. Run: python bet_ranker/score.py
-   → Saves _context/bets.json
-8. Open: bet_ranker/viewer/index.html — see your ranked bets
-9. Run prompts/00_feature_brief.md → generates _context/feature_brief.md
-10. Run prompts/01_data_model.md → generates data/[your-file].json
-11. Build
+1. prompts/00_segment.md   → _context/signals_segmented.json
+2. python3 bet_ranker/score.py → _context/bets.json
+3. prompts/02_feature_brief.md → _context/feature_brief.md
+4. prompts/03_data_model.md → data/candidates.json
+5. prompts/04_first_feature.md → src/index.html, app.css, app.js
 ```
 
 ---
 
-## The rule
+## After Session 1
 
-Real data only. No placeholder signals. No invented outcomes.
-If you don't have the data yet, come with the problem. We find the data together.
+Switch to `_initial_context/` and fill in your own data for the afternoon sprint.

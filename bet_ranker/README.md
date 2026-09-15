@@ -26,7 +26,7 @@ _initial_context/signals_segmented.csv  (structured signals)
 
 ## Step 1: Segment your signals (AI agent)
 
-Open `bet_ranker/segment.md` and follow the instructions.
+Open `prompts/00_segment.md` and follow the instructions.
 
 The prompt tells your AI agent to read `_initial_context/signals.csv` and classify each signal:
 - **type** — deal-loss / problem / friction / mention
@@ -55,8 +55,10 @@ Output: `_context/bets.json`
 Open in your browser:
 
 ```
-http://localhost/productlab_Workshop/starter-repo/bet_ranker/viewer/index.html
+bet_ranker/viewer/index.html
 ```
+
+Or via XAMPP: `http://localhost/productlab_Workshop/starter-repo-simulation/bet_ranker/viewer/index.html`
 
 **Bet #1 is your starting point for the build.**
 
