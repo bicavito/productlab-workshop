@@ -1,5 +1,6 @@
 _future_ideas/
-.agent/
+.agent/skills/reset-simulation/
+.agent/skills/run-simulation/
 _archive/apps/*/
 *.pdf
 .DS_Store
