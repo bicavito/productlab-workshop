@@ -1,6 +1,6 @@
 # From Prompt to Product — Workshop Preparation
 
-Prepare these four files before September 16th.
+Prepare these four files before the workshop.
 
 Open the `_initial_context/` folder. Fill in each file with real material from your work.
 
@@ -13,7 +13,7 @@ Open the `_initial_context/` folder. Fill in each file with real material from y
 
 Each file has instructions inside. Read them first, then fill in your real data.
 
-Bring your laptop with these files on September 16th.
+Bring your laptop with these files on the day of the workshop.
 
 ---
 
@@ -30,7 +30,7 @@ A signal is something a customer actually said. Word for word.
 Not: "Customers want better export."
 But: "We've been doing this manually every Monday for three months. It takes Sarah two hours."
 
-Open the file. You will see the format. Add 5 to 10 rows. Use real things real people said — from support tickets, sales calls, Slack messages, interviews, anything.
+Open the file. You will see the format. Add at least 10 rows — 20 or more give better results. Use real things real people said — from support tickets, sales calls, Slack messages, interviews, anything.
 
 If you have more than 10, bring all of them. More signals give better results.
 
