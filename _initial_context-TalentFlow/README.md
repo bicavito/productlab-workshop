@@ -55,15 +55,15 @@ The scoring model treats these identically. The label doesn't change — only wh
 3. Fill in product_outcome.md
 4. Fill in data_model.md — your product’s entities and fields
 5. Open your AI agent (Claude Code, Cursor, etc.)
-6. Run prompts/00_segment.md
+6. Run the segmentation prompt (bet_ranker/segment.md)
    → AI classifies each signal: type, severity, category, bet
    → Saves _context/signals_segmented.json
-7. Run: python3 bet_ranker/score.py
+7. Run: python bet_ranker/score.py
    → Saves _context/bets.json
 8. Open: bet_ranker/viewer/index.html — see your ranked bets
-9. Run prompts/02_feature_brief.md → generates _context/feature_brief.md
-10. Run prompts/03_data_model.md → generates data/[your-entity].json
-11. Run prompts/04_first_feature.md → builds src/index.html, app.css, app.js
+9. Run prompts/00_feature_brief.md → generates _context/feature_brief.md
+10. Run prompts/01_data_model.md → generates data/[your-file].json
+11. Build
 ```
 
 ---

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bet Ranker</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      background: #f5f5f5;
+      color: #1a1a1a;
+    }
+
+    /* ─── Header ─────────────────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 16px 32px;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      z-index: 10;
+    }
+    header h1 {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    header p {
+      font-size: 12px;
+      color: #888;
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── Layout ─────────────────────────────────────────────── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 32px 32px 64px;
+    }
+
+    /* ─── Error / Loading ────────────────────────────────────── */
+    #status {
+      font-size: 13px;
+      color: #888;
+      padding: 48px 0;
+      text-align: center;
+    }
+
+    /* ─── Bet list ───────────────────────────────────────────── */
+    #bets { display: flex; flex-direction: column; gap: 12px; }
+
+    .bet {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: box-shadow 0.15s;
+    }
+    .bet:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+    /* Bet #1 gets an accent treatment */
+    .bet.top {
+      border-color: #1a1a1a;
+    }
+    .bet.top .bet-header {
+      background: #1a1a1a;
+      color: #fff;
+    }
+    .bet.top .bet-rank { color: #fff; opacity: 0.5; }
+    .bet.top .bet-title { color: #fff; }
+    .bet.top .bet-meta span { color: rgba(255,255,255,0.65); }
+    .bet.top .bet-meta .label-badge {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+    }
+
+    /* ─── Bet header ─────────────────────────────────────────── */
+    .bet-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .bet-rank {
+      font-size: 12px;
+      font-weight: 600;
+      color: #888;
+      letter-spacing: 0.05em;
+      min-width: 28px;
+      text-align: center;
+    }
+    .bet-title {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      flex: 1;
+    }
+    .bet-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .bet-meta span {
+      font-size: 12px;
+      color: #888;
+      letter-spacing: 0.02em;
+    }
+
+    .label-badge {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .label-badge.high   { background: #eafaf1; color: #1e8449; }
+    .label-badge.medium { background: #fef3e2; color: #d68910; }
+    .label-badge.low    { background: #f5f5f5; color: #888; }
+
+    /* ─── Score bar ───────────────────────────────────────────── */
+    .score-bar-wrap {
+      padding: 0 20px 0 64px;
+      height: 4px;
+      background: #f0f0f0;
+    }
+    .score-bar {
+      height: 4px;
+      background: #1a1a1a;
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+    .bet.top .score-bar { background: #fff; }
+
+    /* ─── Signals ─────────────────────────────────────────────── */
+    .bet-signals {
+      display: none;
+      border-top: 1px solid #e5e5e5;
+    }
+    .bet-signals.open { display: block; }
+
+    .bet-signals-header {
+      padding: 10px 20px 10px 64px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #888;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .signal-item {
+      padding: 12px 20px 12px 64px;
+      font-size: 13px;
+      color: #555;
+      line-height: 1.6;
+      border-bottom: 1px solid #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .signal-item:last-child { border-bottom: none; }
+
+    .sig-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+    .sig-badge {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 2px 8px;
+      border-radius: 20px;
+      text-transform: lowercase;
+    }
+    .sig-text { color: #444; line-height: 1.6; }
+
+    /* Type badges */
+    .badge-dealoss  { background: #fde8e8; color: #c0392b; }
+    .badge-problem  { background: #fef3e2; color: #d68910; }
+    .badge-friction { background: #e8f4fd; color: #2980b9; }
+    .badge-mention  { background: #f0f0f0; color: #888; }
+
+    /* Severity badges */
+    .badge-high { background: #fde8e8; color: #c0392b; }
+    .badge-med  { background: #fef3e2; color: #d68910; }
+    .badge-low  { background: #f0f0f0; color: #888; }
+
+
+    /* ─── Toggle arrow ────────────────────────────────────────── */
+    .toggle-arrow {
+      font-size: 10px;
+      color: #bbb;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+    .toggle-arrow.open { transform: rotate(180deg); }
+
+    /* ─── Empty state ─────────────────────────────────────────── */
+    .empty {
+      text-align: center;
+      padding: 64px 32px;
+      color: #888;
+      font-size: 14px;
+      line-height: 2;
+    }
+    .empty strong { display: block; font-size: 16px; color: #1a1a1a; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Bet Ranker</h1>
+  <p id="header-meta">Loading…</p>
+</header>
+
+<main>
+  <div id="status">Loading bets.json…</div>
+  <div id="bets"></div>
+</main>
+
+<script>
+  const MAX_SCORE_CAP = 200; // for score bar width scaling
+
+  function labelClass(label) {
+    if (label === 'High Leverage') return 'high';
+    if (label === 'Medium Leverage') return 'medium';
+    return 'low';
+  }
+
+  function renderBet(bet, maxScore) {
+    const isTop = bet.rank === 1;
+    const barWidth = Math.min((bet.score / Math.max(maxScore, 1)) * 100, 100);
+
+    const div = document.createElement('div');
+    div.className = 'bet' + (isTop ? ' top' : '');
+
+    div.innerHTML = `
+      <div class="bet-header" id="bet-toggle-${bet.rank}">
+        <span class="bet-rank">#${bet.rank}</span>
+        <span class="bet-title">${escHtml(bet.title)}</span>
+        <div class="bet-meta">
+          <span>${bet.signal_count} signal${bet.signal_count !== 1 ? 's' : ''}</span>
+          <span>top: ${escHtml(bet.top_customer_size)}</span>
+          <span class="label-badge ${labelClass(bet.label)}">${escHtml(bet.label)}</span>
+          <span class="toggle-arrow" id="arrow-${bet.rank}">▼</span>
+        </div>
+      </div>
+      <div class="score-bar-wrap">
+        <div class="score-bar" style="width: ${barWidth}%"></div>
+      </div>
+      <div class="bet-signals" id="signals-${bet.rank}">
+        <div class="bet-signals-header">${bet.signal_count} raw signal${bet.signal_count !== 1 ? 's' : ''}</div>
+        ${bet.signals.map(s => {
+          const typeClass = {'deal-loss':'badge-dealoss','problem':'badge-problem','friction':'badge-friction','mention':'badge-mention'}[s.type] || '';
+          const sevClass = {'High':'badge-high','Medium':'badge-med','Low':'badge-low'}[s.severity] || '';
+          return `<div class="signal-item">
+            <span class="sig-badges"><span class="sig-badge ${typeClass}">${escHtml(s.type||'')}</span><span class="sig-badge ${sevClass}">${escHtml(s.severity||'')}</span></span>
+            <span class="sig-text">${escHtml(s.text)}</span>
+          </div>`;
+        }).join('')}
+      </div>
+    `;
+
+    // Toggle signals on click
+    div.querySelector('.bet-header').addEventListener('click', () => {
+      const panel = document.getElementById(`signals-${bet.rank}`);
+      const arrow = document.getElementById(`arrow-${bet.rank}`);
+      const isOpen = panel.classList.toggle('open');
+      arrow.classList.toggle('open', isOpen);
+    });
+
+    // Bet #1 opens by default
+    if (isTop) {
+      setTimeout(() => {
+        document.getElementById(`signals-${bet.rank}`)?.classList.add('open');
+        document.getElementById(`arrow-${bet.rank}`)?.classList.add('open');
+      }, 100);
+    }
+
+    return div;
+  }
+
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  async function load() {
+    const statusEl = document.getElementById('status');
+    const betsEl   = document.getElementById('bets');
+    const metaEl   = document.getElementById('header-meta');
+
+    try {
+      const res = await fetch('../../_context/bets.json');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const bets = await res.json();
+
+      statusEl.style.display = 'none';
+
+      if (!bets || bets.length === 0) {
+        betsEl.innerHTML = `
+          <div class="empty">
+            <strong>No bets yet.</strong>
+            Run <code>python bet_ranker/score.py</code> first,<br>
+            then reload this page.
+          </div>`;
+        metaEl.textContent = '0 bets';
+        return;
+      }
+
+      const maxScore = bets[0].score;
+      metaEl.textContent = `${bets.length} bet${bets.length !== 1 ? 's' : ''} · sorted by impact`;
+
+      bets.forEach(bet => {
+        betsEl.appendChild(renderBet(bet, maxScore));
+      });
+
+    } catch (err) {
+      statusEl.innerHTML = `
+        <div class="empty">
+          <strong>bets.json not found.</strong>
+          Run <code>python bet_ranker/score.py</code> first,<br>
+          then reload this page.
+        </div>`;
+      console.error(err);
+    }
+  }
+
+  load();
+</script>
+
+</body>
+</html>
